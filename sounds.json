@@ -5,5 +5,12 @@
         "sound": "/assets/sounds/shortfart.mp3",
         "category": "Farts",
         "categoryColor": "#FF5733"
+    },
+    {
+        "name": "Ultimate Fart",
+        "image": "/assets/images/dontpress.jpeg",
+        "sound": "/assets/sounds/ultimatefart.mp3",
+        "category": "Farts",
+        "categoryColor": "#FF5733"
     }
 ]
