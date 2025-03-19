@@ -1,0 +1,9 @@
+[
+    {
+        "name": "Short Fart",
+        "image": "/assets/images/dontpress.jpeg",
+        "sound": "/assets/sounds/shortfart.mp3",
+        "category": "Farts",
+        "categoryColor": "#FF5733"
+    }
+]

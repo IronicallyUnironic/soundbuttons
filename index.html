@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funny Soundboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            margin-top: 20px;
+        }
+        .search-container {
+            margin: 20px;
+        }
+        .sound-button {
+            width: 200px;
+            height: 200px;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            background-color: #FF5733;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+        .sound-button:hover {
+            transform: scale(1.1);
+        }
+        .sound-button img {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 10px;
+        }
+        .category {
+            margin-top: 20px;
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .category-title {
+            width: 100%;
+            text-align: center;
+            font-size: 24px;
+            margin-top: 20px;
+        }
+        #searchInput {
+            padding: 10px;
+            font-size: 16px;
+            width: 300px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <h1>Funny Soundboard</h1>
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Search sounds..." />
+    </div>
+    <div id="buttonsContainer"></div> <!-- Container for sound buttons -->
+
+    <script>
+        // Load the sounds JSON file
+        fetch('sounds.json')
+            .then(response => response.json())
+            .then(sounds => {
+                const buttonsContainer = document.getElementById('buttonsContainer');
+                const searchInput = document.getElementById('searchInput');
+                
+                // Function to create sound buttons
+                function createButtons(filteredSounds) {
+                    buttonsContainer.innerHTML = ''; // Clear the container before adding new buttons
+                    filteredSounds.forEach(sound => {
+                        // Create a category container
+                        const categoryContainer = document.createElement('div');
+                        categoryContainer.classList.add('category');
+
+                        // Create button for each sound
+                        const button = document.createElement('button');
+                        button.classList.add('sound-button');
+                        button.style.backgroundColor = sound.categoryColor; // Category color
+
+                        // Create image element
+                        const img = document.createElement('img');
+                        img.src = sound.image;  // Set image path
+                        img.alt = sound.name;   // Set alt text to the name of the sound
+
+                        // Set button text and append the image
+                        button.innerHTML = sound.name;
+                        button.prepend(img);
+
+                        // Add event listener for playing sound
+                        button.addEventListener('click', () => {
+                            const audio = new Audio(sound.sound);  // Create new audio instance with sound file
+                            audio.play();  // Play the sound
+                        });
+
+                        // Append button to the category container
+                        categoryContainer.appendChild(button);
+
+                        // Append category container to the main container
+                        buttonsContainer.appendChild(categoryContainer);
+                    });
+                }
+
+                // Function to filter sounds based on search input
+                searchInput.addEventListener('input', (event) => {
+                    const searchTerm = event.target.value.toLowerCase();
+                    const filteredSounds = sounds.filter(sound =>
+                        sound.name.toLowerCase().includes(searchTerm)
+                    );
+                    createButtons(filteredSounds);
+                });
+
+                // Initial load of all buttons
+                createButtons(sounds);
+            })
+            .catch(error => {
+                console.error("Error loading sounds:", error);
+            });
+    </script>
+</body>
+</html>
