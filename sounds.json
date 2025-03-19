@@ -1,14 +1,14 @@
 [
     {
         "name": "Short Fart",
-        "image": "/assets/images/dontpress.jpeg",
+        "image": "/assets/images/dontpress2.png",
         "sound": "/assets/sounds/shortfart.mp3",
         "category": "Farts",
         "categoryColor": "#FF5733"
     },
     {
         "name": "Ultimate Fart",
-        "image": "/assets/images/dontpress.jpeg",
+        "image": "/assets/images/dontpress2.png",
         "sound": "/assets/sounds/ultimatefart.mp3",
         "category": "Farts",
         "categoryColor": "#FF5733"
